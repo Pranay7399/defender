@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "603256103060",
+    "project_id": "defender-f572a",
+    "storage_bucket": "defender-f572a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603256103060:android:16e76cd49646a78373d481",
+        "android_client_info": {
+          "package_name": "com.example.defender"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603256103060-5pp87mbochh5mioglkh76g1f8ca8kd84.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVsYhtzGMzxHGATIXRAH17HyQcbIkVOaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603256103060-5pp87mbochh5mioglkh76g1f8ca8kd84.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "603256103060-r5gimdo8evkrmas8bmqi575kcnt4rf1b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.defenderApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603256103060:android:546c99871ac6e4d173d481",
+        "android_client_info": {
+          "package_name": "com.example.defender_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603256103060-1d27p8evjpf451focls1sub86j0e96vl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.defender_app",
+            "certificate_hash": "be8aa2bd8ea8b626b66b60fd964c25cae36b39da"
+          }
+        },
+        {
+          "client_id": "603256103060-5pp87mbochh5mioglkh76g1f8ca8kd84.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVsYhtzGMzxHGATIXRAH17HyQcbIkVOaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603256103060-5pp87mbochh5mioglkh76g1f8ca8kd84.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "603256103060-r5gimdo8evkrmas8bmqi575kcnt4rf1b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.defenderApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
