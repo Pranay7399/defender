@@ -150,13 +150,27 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
                           },
                         )
-                      : Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 16, horizontal: 16),
-                          child: Text(
-                            '+${selectedCountryCode!}',
-                            style: const TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w500),
+                      : GestureDetector(
+                          onTap: () {
+                            showCountryPicker(
+                              context: context,
+                              showPhoneCode:
+                                  true, // optional. Shows phone code before the country name.
+                              onSelect: (Country country) {
+                                setState(() {
+                                  selectedCountryCode = country.phoneCode;
+                                });
+                              },
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 16, horizontal: 16),
+                            child: Text(
+                              '+${selectedCountryCode!}',
+                              style: const TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
                 ),
