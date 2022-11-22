@@ -1,10 +1,12 @@
+import 'package:defender/messages_screen.dart';
 import 'package:defender/sailor.dart';
+import 'package:defender/contacts_screen.dart';
 import 'package:defender/splash_screen.dart';
+import 'package:defender/url_validation_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:safe_device/safe_device.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,8 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _urlController = TextEditingController();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final Location location = Location();
 
   bool isJailBroken = false;
@@ -44,12 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (error) {
       print(error);
     }
-    isJailBroken = isJailBroken;
-    canMockLocation = canMockLocation;
-    isRealDevice = isRealDevice;
-    isOnExternalStorage = isOnExternalStorage;
-    isSafeDevice = isSafeDevice;
-    isDevelopmentModeEnable = isDevelopmentModeEnable;
     setState(() {});
   }
 
@@ -171,49 +165,61 @@ class _HomeScreenState extends State<HomeScreen> {
                     'URL Validation:',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                            controller: _urlController,
-                            decoration: const InputDecoration(
-                                hintText: 'Enter or paste the url')),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _urlController.text = '';
-                              });
-                            },
-                            icon: const Icon(Icons.clear)),
-                      )
-                    ],
-                  ),
                   const SizedBox(
                     height: 8,
                   ),
-                  ElevatedButton(
-                      onPressed: () async {
-                        String url = _urlController.text;
-                        print('URL: ' + url);
-                        if (url.isNotEmpty) {
-                          if (await canLaunchUrlString(url)) {
-                            await launchUrlString(url);
-                          } else {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              backgroundColor: Colors.red,
-                              content: Text(
-                                'Invalid URL',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ));
-                          }
-                        }
-                      },
-                      child: const Text('Validate URL'))
+                  Wrap(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Sailor.push(const ContactsScreen());
+                        },
+                        child: const Card(
+                          child: Padding(
+                            padding: EdgeInsets.all(30.0),
+                            child: Text(
+                              'Check \n Contacts',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Sailor.push(const MessagesScreen());
+                        },
+                        child: const Card(
+                          child: Padding(
+                            padding: EdgeInsets.all(30.0),
+                            child: Text(
+                              'Check \n  Messages',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Sailor.push(const UrlValidationScreen());
+                        },
+                        child: const Card(
+                          child: Padding(
+                            padding: EdgeInsets.all(30.0),
+                            child: Text(
+                              'Check \n Spam URL',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w400),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
