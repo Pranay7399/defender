@@ -48,9 +48,9 @@ dependencies:
   country_picker: ^2.0.17
   permission_handler: ^10.2.0
   contacts_service: ^0.6.3
+  safe_url_check: ^1.1.0
   device_apps: ^2.2.0
-
-
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

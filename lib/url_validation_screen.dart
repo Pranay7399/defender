@@ -1,7 +1,6 @@
 import 'package:defender/helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:safe_url_check/safe_url_check.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class UrlValidationScreen extends StatefulWidget {
@@ -50,29 +49,29 @@ class _UrlValidationScreenState extends State<UrlValidationScreen> {
                 onPressed: () async {
                   String url = _urlController.text;
                   print('URL: ' + url);
-                  if (url.isEmpty) {
-                    showSnackBar(
-                        title: 'Please enter some text',
-                        context: context,
-                        type: SnackType.error);
-                    return;
-                  }
-                  if (await canLaunchUrlString(url)) {
-                    //check is url is malicious
-                    if (await isMaliciousUrl(url)) {
+                  // if (await canLaunchUrlString(url)) {
+                  //   await launchUrlString(url);
+                  // } else {
+                  //   showSnackBar(
+                  //       title: 'Cannot launch the url',
+                  //       context: context,
+                  //       type: SnackType.info);
+                  // }
+                  bool isSafe = await safeUrlCheck(Uri.parse(url));
+                  if (isSafe) {
+                    if (await canLaunchUrlString(url)) {
+                      await launchUrlString(url);
+                    } else {
                       showSnackBar(
-                          title: 'URL is malicious',
+                          title: 'Cannot launch the url',
                           context: context,
-                          type: SnackType.error);
-                      return;
+                          type: SnackType.info);
                     }
-
-                    await launchUrlString(url);
                   } else {
                     showSnackBar(
-                        title: 'Invalid Url',
-                        type: SnackType.error,
-                        context: context);
+                        title: 'The url is not safe',
+                        context: context,
+                        type: SnackType.error);
                   }
                 },
                 child: const Text('Validate URL'))
@@ -80,10 +79,5 @@ class _UrlValidationScreenState extends State<UrlValidationScreen> {
         ),
       ),
     );
-  }
-  
-  isMaliciousUrl(String url) {
-    //check url is malicious
-    return false;
   }
 }
