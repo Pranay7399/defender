@@ -32,4 +32,5 @@ class MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         home: const SplashScreen());
   }
+
 }

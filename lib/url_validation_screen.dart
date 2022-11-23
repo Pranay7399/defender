@@ -2,6 +2,7 @@ import 'package:defender/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:safe_url_check/safe_url_check.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class UrlValidationScreen extends StatefulWidget {
@@ -57,22 +58,27 @@ class _UrlValidationScreenState extends State<UrlValidationScreen> {
                         type: SnackType.error);
                     return;
                   }
-                  if (await canLaunchUrlString(url)) {
-                    //check is url is malicious
-                    if (await isMaliciousUrl(url)) {
-                      showSnackBar(
+                  if(await safeUrlCheck(Uri.parse(url))){
+                    print("url is safe");
+                    await launchUrlString(url);
+                  // if (await canLaunchUrlString(url)) {
+                  //   print("url can be launched");
+                  //   //check is url is malicious
+                  //   await launchUrlString(url);
+                  // }else{
+                  //   showSnackBar(
+                  //         title: 'URL cannot be launched',
+                  //         context: context,
+                  //         type: SnackType.error);
+                  //     return;
+                  // }
+                  } else {
+                    print("url is not safe");
+                    showSnackBar(
                           title: 'URL is malicious',
                           context: context,
                           type: SnackType.error);
                       return;
-                    }
-
-                    await launchUrlString(url);
-                  } else {
-                    showSnackBar(
-                        title: 'Invalid Url',
-                        type: SnackType.error,
-                        context: context);
                   }
                 },
                 child: const Text('Validate URL'))
@@ -80,10 +86,5 @@ class _UrlValidationScreenState extends State<UrlValidationScreen> {
         ),
       ),
     );
-  }
-  
-  isMaliciousUrl(String url) {
-    //check url is malicious
-    return false;
   }
 }
