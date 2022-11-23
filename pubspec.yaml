@@ -48,6 +48,8 @@ dependencies:
   country_picker: ^2.0.17
   permission_handler: ^10.2.0
   contacts_service: ^0.6.3
+  device_apps: ^2.2.0
+
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,4 @@
+import 'package:defender/installed_apps_check.dart';
 import 'package:defender/messages_screen.dart';
 import 'package:defender/sailor.dart';
 import 'package:defender/contacts_screen.dart';
@@ -211,6 +212,22 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: EdgeInsets.all(30.0),
                             child: Text(
                               'Check \n Spam URL',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w400),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Sailor.push(const InstalledAppsCheck());
+                        },
+                        child: const Card(
+                          child: Padding(
+                            padding: EdgeInsets.all(30.0),
+                            child: Text(
+                              'Check \n Installed Apps',
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w400),
                               textAlign: TextAlign.center,
