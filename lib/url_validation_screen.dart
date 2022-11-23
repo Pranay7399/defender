@@ -1,7 +1,5 @@
 import 'package:defender/helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:safe_url_check/safe_url_check.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -51,34 +49,29 @@ class _UrlValidationScreenState extends State<UrlValidationScreen> {
                 onPressed: () async {
                   String url = _urlController.text;
                   print('URL: ' + url);
-                  if (url.isEmpty) {
+                  // if (await canLaunchUrlString(url)) {
+                  //   await launchUrlString(url);
+                  // } else {
+                  //   showSnackBar(
+                  //       title: 'Cannot launch the url',
+                  //       context: context,
+                  //       type: SnackType.info);
+                  // }
+                  bool isSafe = await safeUrlCheck(Uri.parse(url));
+                  if (isSafe) {
+                    if (await canLaunchUrlString(url)) {
+                      await launchUrlString(url);
+                    } else {
+                      showSnackBar(
+                          title: 'Cannot launch the url',
+                          context: context,
+                          type: SnackType.info);
+                    }
+                  } else {
                     showSnackBar(
-                        title: 'Please enter some text',
+                        title: 'The url is not safe',
                         context: context,
                         type: SnackType.error);
-                    return;
-                  }
-                  if(await safeUrlCheck(Uri.parse(url))){
-                    print("url is safe");
-                    await launchUrlString(url);
-                  // if (await canLaunchUrlString(url)) {
-                  //   print("url can be launched");
-                  //   //check is url is malicious
-                  //   await launchUrlString(url);
-                  // }else{
-                  //   showSnackBar(
-                  //         title: 'URL cannot be launched',
-                  //         context: context,
-                  //         type: SnackType.error);
-                  //     return;
-                  // }
-                  } else {
-                    print("url is not safe");
-                    showSnackBar(
-                          title: 'URL is malicious',
-                          context: context,
-                          type: SnackType.error);
-                      return;
                   }
                 },
                 child: const Text('Validate URL'))
