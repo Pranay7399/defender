@@ -49,14 +49,6 @@ class _UrlValidationScreenState extends State<UrlValidationScreen> {
                 onPressed: () async {
                   String url = _urlController.text;
                   print('URL: ' + url);
-                  // if (await canLaunchUrlString(url)) {
-                  //   await launchUrlString(url);
-                  // } else {
-                  //   showSnackBar(
-                  //       title: 'Cannot launch the url',
-                  //       context: context,
-                  //       type: SnackType.info);
-                  // }
                   bool isSafe = await safeUrlCheck(Uri.parse(url));
                   if (isSafe) {
                     if (await canLaunchUrlString(url)) {
