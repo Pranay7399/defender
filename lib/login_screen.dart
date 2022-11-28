@@ -113,118 +113,121 @@ class _LoginScreenState extends State<LoginScreen> {
         body: Container(
       padding: const EdgeInsets.all(16),
       child: Form(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              "Please verify your phone number",
-              style: TextStyle(
-                  color: Colors.lightBlue,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.grey)),
-                  child: selectedCountryCode == null
-                      ? IconButton(
-                          icon: const Icon(Icons.arrow_drop_down_sharp),
-                          onPressed: () {
-                            showCountryPicker(
-                              context: context,
-                              showPhoneCode:
-                                  true, // optional. Shows phone code before the country name.
-                              onSelect: (Country country) {
-                                setState(() {
-                                  selectedCountryCode = country.phoneCode;
-                                });
-                              },
-                            );
-                          },
-                        )
-                      : GestureDetector(
-                          onTap: () {
-                            showCountryPicker(
-                              context: context,
-                              showPhoneCode:
-                                  true, // optional. Shows phone code before the country name.
-                              onSelect: (Country country) {
-                                setState(() {
-                                  selectedCountryCode = country.phoneCode;
-                                });
-                              },
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 16, horizontal: 16),
-                            child: Text(
-                              '+${selectedCountryCode!}',
-                              style: const TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w500),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset('assets/images/logo.png'),
+              const Text(
+                "Please verify your phone number",
+                style: TextStyle(
+                    color: Colors.lightBlue,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.grey)),
+                    child: selectedCountryCode == null
+                        ? IconButton(
+                            icon: const Icon(Icons.arrow_drop_down_sharp),
+                            onPressed: () {
+                              showCountryPicker(
+                                context: context,
+                                showPhoneCode:
+                                    true, // optional. Shows phone code before the country name.
+                                onSelect: (Country country) {
+                                  setState(() {
+                                    selectedCountryCode = country.phoneCode;
+                                  });
+                                },
+                              );
+                            },
+                          )
+                        : GestureDetector(
+                            onTap: () {
+                              showCountryPicker(
+                                context: context,
+                                showPhoneCode:
+                                    true, // optional. Shows phone code before the country name.
+                                onSelect: (Country country) {
+                                  setState(() {
+                                    selectedCountryCode = country.phoneCode;
+                                  });
+                                },
+                              );
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 16),
+                              child: Text(
+                                '+${selectedCountryCode!}',
+                                style: const TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.w500),
+                              ),
                             ),
                           ),
-                        ),
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                Expanded(
-                  child: TextFormField(
-                    inputFormatters: [
-                      numberOnly,
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(
+                    child: TextFormField(
+                      inputFormatters: [
+                        numberOnly,
+                      ],
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              borderSide: BorderSide(color: Colors.grey[200]!)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              borderSide: BorderSide(color: Colors.grey[300]!)),
+                          filled: true,
+                          fillColor: Colors.grey[100],
+                          hintText: "Phone Number"),
+                      controller: _phoneController,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: MaterialButton(
+                  textColor: Colors.white,
+                  padding: const EdgeInsets.all(16),
+                  onPressed: verifyPhoneNumber,
+                  color: Colors.blue,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Login"),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      isLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : const SizedBox()
                     ],
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(8)),
-                            borderSide: BorderSide(color: Colors.grey[200]!)),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(8)),
-                            borderSide: BorderSide(color: Colors.grey[300]!)),
-                        filled: true,
-                        fillColor: Colors.grey[100],
-                        hintText: "Phone Number"),
-                    controller: _phoneController,
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: MaterialButton(
-                textColor: Colors.white,
-                padding: const EdgeInsets.all(16),
-                onPressed: verifyPhoneNumber,
-                color: Colors.blue,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Login"),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const SizedBox()
-                  ],
-                ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     ));

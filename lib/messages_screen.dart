@@ -17,7 +17,9 @@ class _MessagesScreenState extends State<MessagesScreen> {
         title: const Text('Messages'),
       ),
       body: Column(
-        children: [],
+        children: [
+          
+        ],
       ),
     );
   }

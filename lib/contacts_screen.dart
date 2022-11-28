@@ -77,45 +77,39 @@ class _ContactsScreenState extends State<ContactsScreen> {
                 itemCount: phoneContacts.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.blue,
-                      child: Text(
-                        phoneContacts[index].displayName?[0].toString() ?? 'A',
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w600),
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.blue,
+                        child: Text(
+                          phoneContacts[index].displayName?[0].toString() ??
+                              'A',
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
                       ),
-                    ),
-                    title: isValidContact(phoneContacts[index])
-                        ? Text(phoneContacts[index].displayName ?? '')
-                        : const Text(
-                            'Invalid Contact',
-                            style: TextStyle(
-                                color: Colors.red,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500),
-                          ),
-                    subtitle: isValidContact(phoneContacts[index])
-                        ? Text(
-                            (phoneContacts[index].phones?.isNotEmpty ?? false)
-                                ? phoneContacts[index].phones?.first.value ?? ''
-                                : 'No contact number')
-                        : const SizedBox(),
-                  );
+                      title: isValidContact(phoneContacts[index])
+                          ? Text(phoneContacts[index].displayName ?? '')
+                          : const Text(
+                              'Invalid Contact',
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                      subtitle: Text(
+                          (phoneContacts[index].phones?.isNotEmpty ?? false)
+                              ? phoneContacts[index].phones?.first.value ?? ''
+                              : 'No contact number'));
                 },
               ));
   }
 
   bool isValidContact(Contact phoneContact) {
     //is valid contact
-    bool val = phoneContact.displayName != null &&
-        phoneContact.displayName!.isNotEmpty &&
-        phoneContact.phones != null &&
+    bool val = phoneContact.phones != null &&
         phoneContact.phones!.isNotEmpty &&
         phoneContact.phones!.first.value != null;
-    //check phone number is 10 digits and having country code
-    if (val) {
-      val = phoneContact.phones!.first.value!.length <= 13;
-    }
-    return val;
+    //regext patterm for phone number
+    RegExp regExp = RegExp(r'^[0-9]+$');
+    return val && regExp.hasMatch(phoneContact.phones!.first.value!);
   }
 }

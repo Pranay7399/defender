@@ -43,15 +43,16 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Image.asset('assets/images/logo.png'),
             const Text(
               'Defender',
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 50,
-                  fontWeight: FontWeight.w500),
+                  fontSize: 30,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white),
             ),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
             isLoading
                 ? const CircularProgressIndicator(

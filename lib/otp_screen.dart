@@ -70,52 +70,57 @@ class _OTPScreenState extends State<OTPScreen> {
         body: Container(
       padding: const EdgeInsets.all(16),
       child: Form(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              "Please verify your otp",
-              style: TextStyle(
-                  color: Colors.lightBlue,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            TextFormField(
-              maxLength: 6,
-              inputFormatters: [
-                numberOnly,
-              ],
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(Radius.circular(8)),
-                      borderSide: BorderSide(color: Colors.grey[200]!)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(Radius.circular(8)),
-                      borderSide: BorderSide(color: Colors.grey[300]!)),
-                  filled: true,
-                  fillColor: Colors.grey[100],
-                  hintText: "Enter OTP"),
-              controller: _otpController,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: MaterialButton(
-                textColor: Colors.white,
-                padding: const EdgeInsets.all(16),
-                onPressed: verifyOtp,
-                color: Colors.blue,
-                child: const Text("Login"),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset('assets/images/logo.png'),
+              const Text(
+                "Please verify your otp",
+                style: TextStyle(
+                    color: Colors.lightBlue,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500),
               ),
-            )
-          ],
+              const SizedBox(
+                height: 16,
+              ),
+              TextFormField(
+                maxLength: 6,
+                inputFormatters: [
+                  numberOnly,
+                ],
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8)),
+                        borderSide: BorderSide(color: Colors.grey[200]!)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8)),
+                        borderSide: BorderSide(color: Colors.grey[300]!)),
+                    filled: true,
+                    fillColor: Colors.grey[100],
+                    hintText: "Enter OTP"),
+                controller: _otpController,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: MaterialButton(
+                  textColor: Colors.white,
+                  padding: const EdgeInsets.all(16),
+                  onPressed: verifyOtp,
+                  color: Colors.blue,
+                  child: const Text("Login"),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     ));
