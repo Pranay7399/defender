@@ -31,7 +31,11 @@ class _UrlValidationScreenState extends State<UrlValidationScreen> {
                   child: TextFormField(
                       controller: _urlController,
                       decoration: const InputDecoration(
-                          hintText: 'Enter or paste the url')),
+                        hintText: 'Enter or paste the url',
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0))),
+                      )),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -48,7 +52,7 @@ class _UrlValidationScreenState extends State<UrlValidationScreen> {
             ElevatedButton(
                 onPressed: () async {
                   String url = _urlController.text;
-                  print('URL: ' + url);
+
                   bool isSafe = await safeUrlCheck(Uri.parse(url));
                   if (isSafe) {
                     if (await canLaunchUrlString(url)) {

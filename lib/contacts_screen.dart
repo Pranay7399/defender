@@ -108,8 +108,12 @@ class _ContactsScreenState extends State<ContactsScreen> {
     bool val = phoneContact.phones != null &&
         phoneContact.phones!.isNotEmpty &&
         phoneContact.phones!.first.value != null;
-    //regext patterm for phone number
-    RegExp regExp = RegExp(r'^[0-9]+$');
-    return val && regExp.hasMatch(phoneContact.phones!.first.value!);
+    if (!val) {
+      return false;
+    }
+    if (phoneContact.phones!.first.value!.contains('#')) {
+      return false;
+    }
+    return val && true;
   }
 }

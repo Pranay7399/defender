@@ -51,6 +51,8 @@ dependencies:
   safe_url_check: ^1.1.0
   device_apps: ^2.2.0
   flutter_barcode_scanner: ^2.0.0
+  flutter_sms_inbox: ^1.0.2
+  store_checker: ^1.1.0
   
   
 dev_dependencies:
